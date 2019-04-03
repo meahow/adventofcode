@@ -6,7 +6,7 @@ def solve(thelist, skiplist):
     asciiskiplist = [ord(c) for c in skiplist]
     asciiskiplist.extend([17, 31, 73, 47, 23])
     # calculate dense hash
-    thelist = round(thelist, asciiskiplist)
+    thelist = round(thelist, asciiskiplist, 64)
     # calculate sparse hash (XOR)
     assert len(thelist) == 256
     outputlist = []
@@ -17,15 +17,15 @@ def solve(thelist, skiplist):
             xor ^= j
         outputlist.append(xor)
     # make a hex
-    return "".join(["%x" % x for x in outputlist])
+    return "".join(["%02x" % x for x in outputlist])
 
-def round(thelist, skiplist):
+def round(thelist, skiplist, iterations):
     lenlist = len(thelist)
     idx = 0
     skip = 0
     lenskiplist = len(skiplist)
-    for round in range(64):
-        # print("starting round ", round)
+    for r in range(iterations):
+        # print("starting round ", r)
         # print("thelist: ", thelist)
         for skip in range(skip, skip + lenskiplist):
             length = skiplist[skip % lenskiplist]
@@ -37,12 +37,16 @@ def round(thelist, skiplist):
                 current_list.extend(thelist[:rest])
             current_list.reverse()
             # update all items
+            # import pdb; pdb.set_trace()
             for i in range(length):
                 tmp_idx = (i + idx) % lenlist
                 thelist[tmp_idx] = current_list[i]
+            # print(" -> %s, pos=%s, skip=%s, length=%s" % (thelist, idx, skip, length))
             jump = length + skip
             idx += jump
             idx %= lenlist
+        skip += 1
+    # print("thelist: ", thelist)
     return thelist
 
 if __name__ == '__main__':
