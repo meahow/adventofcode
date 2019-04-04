@@ -32,7 +32,11 @@ def test_4():
 def test_5():
     thelist = list(range(5))
     input_lengths = [3, 4, 1, 5]
-    # assert solution2.round(thelist, input_lengths, 1) == [3, 4, 2, 1, 0]
+    assert solution2.round(thelist, input_lengths, 1) == [3, 4, 2, 1, 0]
+
+def test_6():
+    thelist = list(range(5))
+    input_lengths = [3, 4, 1, 5]
     # 3 4 2 1 [0], pos=4, skip=4, length=3
     # 3 0 [2] 1 4, pos=2, skip=5, lenght=4
     # 2 [0] 3 4 1, pos=1, skip=6, length=1
@@ -43,9 +47,10 @@ def test_5():
 def test_round_1():
     input_line = [2]
     thelist = list(range(5))
-    assert solution2.round(thelist, input_line, 1) == [1, 0]
+    assert solution2.round(thelist, input_line, 1) == [1, 0, 2, 3, 4]
 
 def test_round_2():
     input_line = [2]
     thelist = list(range(5))
-    assert solution2.round(thelist, input_line, 10) == [0, 1]
+    assert solution2.round(thelist, input_line, 2) == [1, 0, 3, 2, 4]
+
