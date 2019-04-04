@@ -52,6 +52,7 @@ def round(thelist, skiplist, iterations):
 if __name__ == '__main__':
     with open("input.txt") as infile:
         inp = infile.readline()
+    print(inp)
     thelist = list(range(256))
-    solution = solve(thelist, inp)
+    solution = solve(thelist, inp.strip())
     print(solution)
