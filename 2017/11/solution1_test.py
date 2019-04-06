@@ -25,3 +25,20 @@ def test_4():
     steps = "se,sw,se,sw,sw"
     assert solution1.solve(steps) == 3
 
+
+def test_move_1():
+    steps = "ne,ne,ne"
+    assert solution1.move(steps) == (3, 3)
+
+def test_move_2():
+    steps = "ne,ne,sw,sw"
+    assert solution1.move(steps) == (0, 0)
+
+def test_move_3():
+    steps = "ne,ne,s,s"
+    assert solution1.move(steps) == (2, -2)
+
+def test_move_4():
+    steps = "se,sw,se,sw,sw"
+    assert solution1.move(steps) == (-1, -5)
+
